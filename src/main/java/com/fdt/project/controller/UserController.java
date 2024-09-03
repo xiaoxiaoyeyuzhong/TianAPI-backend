@@ -192,7 +192,7 @@ public class UserController {
      * @return
      */
     @GetMapping("/list")
-    public BaseResponse<List<UserVO>> listUser(UserQueryRequest userQueryRequest, HttpServletRequest request) {
+    public BaseResponse<List<UserVO>> listUser(@RequestBody UserQueryRequest userQueryRequest, HttpServletRequest request) {
         User userQuery = new User();
         if (userQueryRequest != null) {
             BeanUtils.copyProperties(userQueryRequest, userQuery);
@@ -215,7 +215,7 @@ public class UserController {
      * @return
      */
     @GetMapping("/list/page")
-    public BaseResponse<Page<UserVO>> listUserByPage(UserQueryRequest userQueryRequest, HttpServletRequest request) {
+    public BaseResponse<Page<UserVO>> listUserByPage(@RequestBody UserQueryRequest userQueryRequest, HttpServletRequest request) {
         long current = 1;
         long size = 10;
         User userQuery = new User();

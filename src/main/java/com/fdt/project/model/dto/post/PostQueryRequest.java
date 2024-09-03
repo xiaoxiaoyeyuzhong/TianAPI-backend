@@ -1,6 +1,7 @@
 package com.fdt.project.model.dto.post;
 
 import com.fdt.project.common.PageRequest;
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -11,6 +12,7 @@ import java.io.Serializable;
  *
  * @author fdt
  */
+@ApiModel(description = "用户信息查询请求")
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class PostQueryRequest extends PageRequest implements Serializable {

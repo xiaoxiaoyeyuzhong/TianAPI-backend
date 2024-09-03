@@ -1,8 +1,7 @@
 package com.fdt.project.model.dto.InterfaceInfo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.fdt.project.common.PageRequest;
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -11,6 +10,7 @@ import java.io.Serializable;
 /**
  * 查询请求
  */
+@ApiModel(description = "用户信息查询请求")
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class InterfaceInfoQueryRequest extends PageRequest implements Serializable {

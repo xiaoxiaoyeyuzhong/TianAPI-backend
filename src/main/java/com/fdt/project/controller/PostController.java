@@ -157,7 +157,7 @@ public class PostController {
      */
     @AuthCheck(mustRole = "admin")
     @GetMapping("/list")
-    public BaseResponse<List<Post>> listPost(PostQueryRequest postQueryRequest) {
+    public BaseResponse<List<Post>> listPost(@RequestBody PostQueryRequest postQueryRequest) {
         Post postQuery = new Post();
         if (postQueryRequest != null) {
             BeanUtils.copyProperties(postQueryRequest, postQuery);
@@ -175,7 +175,7 @@ public class PostController {
      * @return
      */
     @GetMapping("/list/page")
-    public BaseResponse<Page<Post>> listPostByPage(PostQueryRequest postQueryRequest, HttpServletRequest request) {
+    public BaseResponse<Page<Post>> listPostByPage(@RequestBody PostQueryRequest postQueryRequest, HttpServletRequest request) {
         if (postQueryRequest == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }

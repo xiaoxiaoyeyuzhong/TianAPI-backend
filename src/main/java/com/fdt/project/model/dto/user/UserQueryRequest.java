@@ -1,6 +1,7 @@
 package com.fdt.project.model.dto.user;
 
 import com.fdt.project.common.PageRequest;
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -12,6 +13,7 @@ import java.util.Date;
  *
  * @author fdt
  */
+@ApiModel(description = "用户信息查询请求")
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class UserQueryRequest extends PageRequest implements Serializable {
