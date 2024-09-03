@@ -3,7 +3,7 @@ package com.fdt.project.constant;
 /**
  * 用户常量
  *
- * @author yupi
+ * @author fdt
  */
 public interface UserConstant {
 

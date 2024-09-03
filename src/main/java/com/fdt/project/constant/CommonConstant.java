@@ -3,7 +3,7 @@ package com.fdt.project.constant;
 /**
  * 通用常量
  *
- * @author yupi
+ * @author fdt
  */
 public interface CommonConstant {
 

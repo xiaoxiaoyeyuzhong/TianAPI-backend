@@ -3,7 +3,7 @@ package com.fdt.project.common;
 /**
  * 错误码
  *
- * @author yupi
+ * @author fdt
  */
 public enum ErrorCode {
 

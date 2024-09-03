@@ -22,7 +22,7 @@ import static com.fdt.project.constant.UserConstant.USER_LOGIN_STATE;
 /**
  * 用户服务实现类
  *
- * @author yupi
+ * @author fdt
  */
 @Service
 @Slf4j

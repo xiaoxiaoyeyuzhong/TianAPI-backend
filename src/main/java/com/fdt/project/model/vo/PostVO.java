@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 /**
  * 帖子视图
  *
- * @author yupi
+ * @author fdt
  * @TableName product
  */
 @EqualsAndHashCode(callSuper = true)
