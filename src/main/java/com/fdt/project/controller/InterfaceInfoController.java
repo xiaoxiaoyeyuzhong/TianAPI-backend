@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
- * 帖子接口
+ * 接口信息接口
  *
  * @author fdt
  */
@@ -168,7 +168,7 @@ public class InterfaceInfoController {
      * @param request http请求
      * @return 接口信息分页列表
      */
-    @GetMapping("/list/page")
+    @PostMapping("/list/page")
     public BaseResponse<Page<InterfaceInfo>> listInterfaceInfoByPage(@RequestBody InterfaceInfoQueryRequest interfaceInfoQueryRequest, HttpServletRequest request) {
         if (interfaceInfoQueryRequest == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);

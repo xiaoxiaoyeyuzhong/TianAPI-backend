@@ -14,6 +14,8 @@ create table if not exists user
     gender       tinyint                                null comment '性别',
     userRole     varchar(256) default 'user'            not null comment '用户角色：user / admin',
     userPassword varchar(512)                           not null comment '密码',
+    accessKey     varchar(512)                          null comment '用户标识',
+    secretKey     varchar(512)                          null comment '用户密钥',
     createTime   datetime     default CURRENT_TIMESTAMP not null comment '创建时间',
     updateTime   datetime     default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
     isDelete     tinyint      default 0                 not null comment '是否删除',
@@ -56,7 +58,7 @@ create table if not exists tian_api.`interface_info`
     `status` int default 1 not null comment '接口状态,(0-关闭,1-开启)',
     `method` varchar(256) default 'get' not null comment '请求类型',
     `userId` bigint not null comment '接口创建人id',
-    `createTime` datetime not null comment '创建时间',
-    `updateTime` datetime not null comment '更新时间',
-    `isDelete` tinyint default 1 not null comment '是否删除,(0-删除,1-未删除)'
+    `createTime`   datetime     default CURRENT_TIMESTAMP not null comment '创建时间',
+    `updateTime`   datetime     default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
+    `isDelete` tinyint default 1 not null comment '是否删除,(0-未删除,1-删除)'
 ) comment '接口表';
