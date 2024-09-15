@@ -3,10 +3,7 @@ package com.fdt.project.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fdt.project.annotation.AuthCheck;
-import com.fdt.project.common.BaseResponse;
-import com.fdt.project.common.DeleteRequest;
-import com.fdt.project.common.ErrorCode;
-import com.fdt.project.common.ResultUtils;
+import com.fdt.project.common.*;
 import com.fdt.project.constant.CommonConstant;
 import com.fdt.project.exception.BusinessException;
 import com.fdt.project.model.dto.InterfaceInfo.InterfaceInfoAddRequest;
@@ -40,6 +37,7 @@ public class InterfaceInfoController {
 
     @Resource
     private UserService userService;
+
 
     // region 增删改查
 
@@ -194,6 +192,38 @@ public class InterfaceInfoController {
         return ResultUtils.success(interfaceInfoPage);
     }
 
-    // endregion
+    /**
+     * 发布接口
+     * @param idRequest id请求
+     * @param request http请求
+     * @return boolean 发布结果
+     */
+    @PostMapping("online")
+    @AuthCheck(mustRole = "admin")
+    public BaseResponse<Boolean> onlineInterfaceInfo(@RequestBody IdRequest idRequest, HttpServletRequest request) {
+        if (idRequest == null || idRequest.getId() <= 0) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        boolean result = interfaceInfoService.onlineInterfaceInfo(idRequest,request);
+
+        return ResultUtils.success(result);
+    }
+
+    /**
+     * 下线接口
+     * @param idRequest id请求
+     * @param request http请求
+     * @return boolean 下线结果
+     */
+    @PostMapping("offline")
+    @AuthCheck(mustRole = "admin")
+    public BaseResponse<Boolean> offlineInterfaceInfo(@RequestBody IdRequest idRequest, HttpServletRequest request) {
+        if (idRequest == null || idRequest.getId() <= 0) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        boolean result = interfaceInfoService.offlineInterfaceInfo(idRequest,request);
+
+        return ResultUtils.success(result);
+    }
 
 }
