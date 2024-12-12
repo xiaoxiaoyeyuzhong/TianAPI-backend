@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.fdt.project.annotation.AuthCheck;
 import com.fdt.project.common.ErrorCode;
 import com.fdt.project.exception.BusinessException;
-import com.fdt.project.model.entity.User;
+import com.fdt.tianAPICommon.model.entity.User;
 import com.fdt.project.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;

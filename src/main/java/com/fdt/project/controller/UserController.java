@@ -10,7 +10,7 @@ import com.fdt.project.common.ResultUtils;
 import com.fdt.project.exception.BusinessException;
 import com.fdt.project.model.dto.*;
 import com.fdt.project.model.dto.user.*;
-import com.fdt.project.model.entity.User;
+import com.fdt.tianAPICommon.model.entity.User;
 import com.fdt.project.model.vo.UserVO;
 import com.fdt.project.service.UserService;
 import org.apache.commons.lang3.StringUtils;

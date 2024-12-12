@@ -6,10 +6,14 @@ import com.fdt.clientsdk.client.TianApiClient;
 import com.fdt.project.common.ErrorCode;
 import com.fdt.project.common.IdRequest;
 import com.fdt.project.exception.BusinessException;
-import com.fdt.project.model.entity.InterfaceInfo;
+import com.fdt.project.model.dto.InterfaceInfo.InterfaceInfoInvokeRequest;
+import com.fdt.tianAPICommon.model.entity.InterfaceInfo;
+import com.fdt.tianAPICommon.model.entity.User;
 import com.fdt.project.model.enums.InterfaceInfoEnum;
 import com.fdt.project.service.InterfaceInfoService;
 import com.fdt.project.mapper.InterfaceInfoMapper;
+import com.fdt.project.service.UserService;
+import com.google.gson.Gson;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -26,6 +30,9 @@ public class InterfaceInfoServiceImpl extends ServiceImpl<InterfaceInfoMapper, I
 
     @Resource
     private TianApiClient tianApiClient;
+
+    @Resource
+    private UserService userService;
 
     /**
      * 接口信息校验方法
@@ -132,6 +139,35 @@ public class InterfaceInfoServiceImpl extends ServiceImpl<InterfaceInfoMapper, I
         interfaceInfo.setId(id);
         interfaceInfo.setStatus(InterfaceInfoEnum.OFFLINE.getValue());
         return this.updateById(interfaceInfo);
+    }
+
+    /**
+     * 调试接口
+     * @param interfaceInfoInvokeRequest 调试请求
+     * @param request http请求
+     */
+    @Override
+    public Object invokeInterfaceInfo(InterfaceInfoInvokeRequest interfaceInfoInvokeRequest, HttpServletRequest request) {
+        long id = interfaceInfoInvokeRequest.getId();
+        String userRequestParams = interfaceInfoInvokeRequest.getUserRequestParams();
+        InterfaceInfo interfaceInfo = this.getById(id);
+        //接口不存在，返回错误
+        if (interfaceInfo == null) {
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
+        }
+        //接口已关闭，返回错误
+        if (interfaceInfo.getStatus() == InterfaceInfoEnum.OFFLINE.getValue()) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR,"接口已关闭");
+        }
+        //获取当前用户的accessKey和secretKey
+        User loginUser = userService.getLoginUser(request);
+        String accessKey = loginUser.getAccessKey();
+        String secretKey = loginUser.getSecretKey();
+        Gson gson = new Gson();
+        com.fdt.clientsdk.model.User user = gson.fromJson(userRequestParams, com.fdt.clientsdk.model.User.class);
+        TianApiClient tempApiClient = new TianApiClient(accessKey,secretKey);
+        Object result = tempApiClient.getNameByPostJson(user);
+        return result;
     }
 
 }

@@ -1,10 +1,10 @@
 package com.fdt.project.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.fdt.project.model.entity.User;
+import com.fdt.tianAPICommon.model.entity.User;
 
 /**
- * @Entity com.fdt.project.model.domain.User
+ * @Entity com.fdt.tianAPICommon.model.domain.User
  */
 public interface UserMapper extends BaseMapper<User> {
 

@@ -14,7 +14,7 @@ import com.fdt.project.model.dto.post.PostDoThumbRequest;
 import com.fdt.project.model.dto.post.PostQueryRequest;
 import com.fdt.project.model.dto.post.PostUpdateRequest;
 import com.fdt.project.model.entity.Post;
-import com.fdt.project.model.entity.User;
+import com.fdt.tianAPICommon.model.entity.User;
 import com.fdt.project.model.vo.PostVO;
 import com.fdt.project.service.PostService;
 import com.fdt.project.service.UserService;

@@ -2,17 +2,22 @@ package com.fdt.project.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.fdt.clientsdk.client.TianApiClient;
 import com.fdt.project.annotation.AuthCheck;
 import com.fdt.project.common.*;
 import com.fdt.project.constant.CommonConstant;
+import com.fdt.project.constant.UserConstant;
 import com.fdt.project.exception.BusinessException;
 import com.fdt.project.model.dto.InterfaceInfo.InterfaceInfoAddRequest;
+import com.fdt.project.model.dto.InterfaceInfo.InterfaceInfoInvokeRequest;
 import com.fdt.project.model.dto.InterfaceInfo.InterfaceInfoQueryRequest;
 import com.fdt.project.model.dto.InterfaceInfo.InterfaceInfoUpdateRequest;
-import com.fdt.project.model.entity.InterfaceInfo;
-import com.fdt.project.model.entity.User;
+import com.fdt.tianAPICommon.model.entity.InterfaceInfo;
+import com.fdt.tianAPICommon.model.entity.User;
+import com.fdt.project.model.enums.InterfaceInfoEnum;
 import com.fdt.project.service.InterfaceInfoService;
 import com.fdt.project.service.UserService;
+import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -147,7 +152,7 @@ public class InterfaceInfoController {
      * @param interfaceInfoQueryRequest 接口信息查询请求
      * @return 接口信息列表
      */
-    @AuthCheck(mustRole = "admin")
+    @AuthCheck(mustRole = UserConstant.ADMIN_ROLE)
     @GetMapping("/list")
     public BaseResponse<List<InterfaceInfo>> listInterfaceInfo(@RequestBody InterfaceInfoQueryRequest interfaceInfoQueryRequest) {
         InterfaceInfo interfaceInfoQuery = new InterfaceInfo();
@@ -223,6 +228,21 @@ public class InterfaceInfoController {
         }
         boolean result = interfaceInfoService.offlineInterfaceInfo(idRequest,request);
 
+        return ResultUtils.success(result);
+    }
+
+    /**
+     * 前端调试接口
+     * @param interfaceInfoInvokeRequest 接口调试请求
+     * @param request http请求
+     * @return
+     */
+    @PostMapping("/invoke")
+    public BaseResponse<Object> invokeInterfaceInfo(@RequestBody InterfaceInfoInvokeRequest interfaceInfoInvokeRequest, HttpServletRequest request) {
+        if (interfaceInfoInvokeRequest == null || interfaceInfoInvokeRequest.getId() <= 0) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        Object result = interfaceInfoService.invokeInterfaceInfo(interfaceInfoInvokeRequest, request);
         return ResultUtils.success(result);
     }
 

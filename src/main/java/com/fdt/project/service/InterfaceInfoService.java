@@ -1,7 +1,8 @@
 package com.fdt.project.service;
 
 import com.fdt.project.common.IdRequest;
-import com.fdt.project.model.entity.InterfaceInfo;
+import com.fdt.project.model.dto.InterfaceInfo.InterfaceInfoInvokeRequest;
+import com.fdt.tianAPICommon.model.entity.InterfaceInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -36,4 +37,11 @@ public interface InterfaceInfoService extends IService<InterfaceInfo> {
      * @return boolean 下线结果
      */
     boolean offlineInterfaceInfo(IdRequest idRequest, HttpServletRequest request);
+
+    /**
+     * 调试接口
+     * @param interfaceInfoInvokeRequest 调试请求
+     * @param request http请求
+     */
+    Object invokeInterfaceInfo(InterfaceInfoInvokeRequest interfaceInfoInvokeRequest, HttpServletRequest request);
 }
