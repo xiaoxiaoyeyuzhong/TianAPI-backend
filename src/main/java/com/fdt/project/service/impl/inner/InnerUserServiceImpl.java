@@ -20,8 +20,8 @@ public class InnerUserServiceImpl implements InnerUserService {
     @Override
     public User getInvokeUser(String accessKey) {
 
-        // 参数校验
-        if(StringUtils.isNotBlank(accessKey)){
+        // 参数校验,isNotBlank()判断字符串是否为空或只有空格，不为空返回true
+        if(!StringUtils.isNotBlank(accessKey)){
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
 
