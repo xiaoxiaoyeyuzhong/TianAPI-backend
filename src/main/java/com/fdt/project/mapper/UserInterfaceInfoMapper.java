@@ -3,6 +3,8 @@ package com.fdt.project.mapper;
 import com.fdt.tianAPICommon.model.entity.UserInterfaceInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
+import java.util.List;
+
 /**
 * @author 冯德田
 * @description 针对表【user_interface_info】的数据库操作Mapper
@@ -10,6 +12,12 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @Entity com.fdt.tianAPICommon.model.entity.UserInterfaceInfo
 */
 public interface UserInterfaceInfoMapper extends BaseMapper<UserInterfaceInfo> {
+    //SELECT interfaceInfoId, COUNT(totalNum) AS totalNum
+    //FROM user_interface_info
+    //GROUP BY interfaceInfoId
+    //ORDER BY totalNum DESC
+    //LIMIT 3;
+    List<UserInterfaceInfo> listTopInvokeInterfaceInfo(int limit);
 
 }
 
